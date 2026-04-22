@@ -19,10 +19,8 @@ jobs:
           - platform: macos-latest
             args: '--target universal-apple-darwin'
 
-    runs-on: ${{ matrix.platform }} 
-    permissions:
-      contents: write  
-      
+    runs-on: ${{ matrix.platform }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,6 +51,17 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
+      - name: Generate proper icons
+        run: npm run tauri icon src-tauri/icons/128x128.png
+
+      - name: Create lib.rs if missing
+        run: |
+          mkdir -p src-tauri/src
+          if [ ! -f src-tauri/src/lib.rs ]; then
+            echo "pub mod voxel;" > src-tauri/src/lib.rs
+          fi
+        shell: bash
+
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
         env:
@@ -65,14 +74,13 @@ jobs:
 
             Free 3D clay sculpting with live hand tracking.
 
-            ### Download the right file for your OS below
+            ### Download the right file for your OS
             - **Windows** → `.msi`
             - **macOS** → `.dmg`
             - **Linux** → `.AppImage`
 
             No account required. Apache 2.0 open source.
-
-            Built by Saee Mannikar · github.com/saeemannikar
+            Made by Saee Mannikar
           releaseDraft: true
           prerelease: true
           args: ${{ matrix.args }}
