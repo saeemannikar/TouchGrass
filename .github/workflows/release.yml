@@ -51,8 +51,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
-      - name: Generate proper icons
-        run: npm run tauri icon src-tauri/icons/128x128.png
+      - name: Generate all icons from source PNG
+        run: npx @tauri-apps/cli icon src-tauri/icons/128x128.png
 
       - name: Create lib.rs if missing
         run: |
