@@ -22,4 +22,4 @@ from a single 1024x1024 PNG.
 ## TouchGrass icon concept
 
 A warm clay-coloured open palm, slightly stylised, on a dark charcoal bg.
-Or a simple geometric blob of clay — matches the burnt orange accent (#c97c3a).
+Or a simple geometric blob of clay — matches the burnt orange accent (#c97c3a). 
